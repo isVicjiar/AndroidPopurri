@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/size"
+        android:title="Change size"/>
+
+    <item
+        android:id="@+id/images"
+        android:title="Images"/>
+
+    <item
+        android:id="@+id/reset"
+        android:title="Reset"/>
+
+</menu>

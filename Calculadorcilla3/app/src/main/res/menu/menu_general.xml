@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:title="Home">
+    </item>
+    <item
+        android:id="@+id/calculator"
+        android:title="Calculator">
+        </item>
+    <item
+        android:id="@+id/music"
+        android:title="Music">
+        </item>
+    <item
+        android:id="@+id/game"
+        android:title="Game">
+        </item>
+    <item
+        android:id="@+id/profile"
+        android:title="Profile">
+        </item>
+    <item
+        android:id="@+id/loggout"
+        android:title="Log Out">
+        </item>
+
+
+</menu>

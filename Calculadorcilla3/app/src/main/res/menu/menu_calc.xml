@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/call"
+        android:title="Call"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_phone_black_24dp">
+    </item>
+    <item
+        android:id="@+id/navigator"
+        android:title="Internet"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_language_black_24dp">
+    </item>
+
+    <item
+        android:id="@+id/notifications"
+        android:title="Notifications"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_sms_failed_black_24dp">
+
+        <menu>
+            <item
+                android:id="@+id/toast"
+                android:title="Use toast notifcations">
+            </item>
+            <item
+                android:id="@+id/bar"
+                android:title="Use bar notifcations">
+            </item>
+
+            </menu>
+    </item>
+
+</menu>
