@@ -38,7 +38,7 @@ public class Home extends Fragment {
 
     Context context;
 
-    String appid="4fdb50b306573407655954b2b9bbafdd";
+    String appid="59c89b5cecab0b9fd0a25c25bef43f45";
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.openweathermap.org/data/2.5/")
@@ -63,7 +63,7 @@ public class Home extends Fragment {
     LocationListener locationListener;
 
     public void getWeather () {
-        service.getWeather(lati, longi, appid).enqueue(new Callback<WeatherMessage>() {
+        service.getWeather(String.valueOf(lati), String.valueOf(longi), appid).enqueue(new Callback<WeatherMessage>() {
             @Override
             public void onResponse(Call<WeatherMessage> call, Response<WeatherMessage> response) {
                 String weather = response.body().getMessage();

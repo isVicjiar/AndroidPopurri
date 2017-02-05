@@ -11,7 +11,6 @@ import retrofit2.http.Query;
  */
 
 public interface WeatherInterface {
-    @Headers({ "Accept: application/json" })
     @GET("/weather")
-    Call<WeatherMessage> getWeather(@Query("lat") double lati, @Query("lon") double longi, @Query("APPID") String appid);
+    Call<WeatherMessage> getWeather(@Query("lat") String lati, @Query("lon") String longi, @Query("APPID") String appid);
 }
