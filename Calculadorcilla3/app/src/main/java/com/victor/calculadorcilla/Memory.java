@@ -4,52 +4,31 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.material.joanbarroso.flipper.CoolImageFlipper;
 
 import java.util.Random;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
-
-import static android.graphics.Color.WHITE;
 
 /**
  * Created by inlab on 30/01/2017.
  */
 
-public class Memory extends BaseActivity {
+public class Memory extends BaseActivity{
 
-    ImageView zero;
-    ImageView one;
-    ImageView two;
-    ImageView three;
-    ImageView four;
-    ImageView five;
-    ImageView six;
-    ImageView seven;
-    ImageView eight;
-    ImageView nine;
-    ImageView ten;
-    ImageView eleven;
-    ImageView twelve;
-    ImageView thirteen;
-    ImageView fourteen;
-    ImageView fifteen;
-
+    int GameMode;
+    String ImagePack;
     peopleDB peopledb;
-
     SharedPreferences settings;
-
-    TextView trys;
+    TextView trys4;
+    TextView trys6;
 
     Boolean oneisflipped=false;
     ImageView theoneflipped;
@@ -65,64 +44,217 @@ public class Memory extends BaseActivity {
     Drawable back;
     Drawable image;
 
-    Boolean back0= true;
-    Boolean back1= true;
-    Boolean back2= true;
-    Boolean back3= true;
-    Boolean back4= true;
-    Boolean back5= true;
-    Boolean back6= true;
-    Boolean back7= true;
-    Boolean back8= true;
-    Boolean back9= true;
-    Boolean back10= true;
-    Boolean back11= true;
-    Boolean back12= true;
-    Boolean back13= true;
-    Boolean back14= true;
-    Boolean back15= true;
+
+    int imagesfoure[]={R.drawable.ic_angry,R.drawable.ic_angel,R.drawable.ic_cool,R.drawable.ic_crying_1,R.drawable.ic_cute,R.drawable.ic_happy_4,R.drawable.ic_in_love,R.drawable.ic_sick,R.drawable.ic_angry,R.drawable.ic_angel,R.drawable.ic_cool,R.drawable.ic_crying_1,R.drawable.ic_cute,R.drawable.ic_happy_4,R.drawable.ic_in_love,R.drawable.ic_sick};
+    int imagessixe[]={R.drawable.ic_angry,R.drawable.ic_angel,R.drawable.ic_cool,R.drawable.ic_crying_1,R.drawable.ic_cute,R.drawable.ic_happy_4,R.drawable.ic_in_love,R.drawable.ic_sick,R.drawable.ic_shocked,R.drawable.ic_sleepy,R.drawable.ic_wink_1,R.drawable.ic_arrogant,R.drawable.ic_bored,R.drawable.ic_surprised_3,R.drawable.ic_smart,R.drawable.ic_muted,R.drawable.ic_confused,R.drawable.ic_kiss,R.drawable.ic_angry,R.drawable.ic_angel,R.drawable.ic_cool,R.drawable.ic_crying_1,R.drawable.ic_cute,R.drawable.ic_happy_4,R.drawable.ic_in_love,R.drawable.ic_sick,R.drawable.ic_shocked,R.drawable.ic_sleepy,R.drawable.ic_wink_1,R.drawable.ic_arrogant,R.drawable.ic_bored,R.drawable.ic_surprised_3,R.drawable.ic_smart,R.drawable.ic_muted,R.drawable.ic_confused,R.drawable.ic_kiss};
+    int imagesfourp[]={R.drawable.ic_abra,R.drawable.ic_bellsprout,R.drawable.ic_bullbasaur,R.drawable.ic_caterpie,R.drawable.ic_charmander,R.drawable.ic_dratini,R.drawable.ic_eevee,R.drawable.ic_jigglypuff,R.drawable.ic_abra,R.drawable.ic_bellsprout,R.drawable.ic_bullbasaur,R.drawable.ic_caterpie,R.drawable.ic_charmander,R.drawable.ic_dratini,R.drawable.ic_eevee,R.drawable.ic_jigglypuff};
+    int imagessixp[]={R.drawable.ic_abra,R.drawable.ic_bellsprout,R.drawable.ic_bullbasaur,R.drawable.ic_caterpie,R.drawable.ic_charmander,R.drawable.ic_dratini,R.drawable.ic_eevee,R.drawable.ic_jigglypuff,R.drawable.ic_mankey,R.drawable.ic_meowth,R.drawable.ic_mew,R.drawable.ic_pidgey,R.drawable.ic_pikachu_2,R.drawable.ic_snorlax,R.drawable.ic_psyduck,R.drawable.ic_rattata,R.drawable.ic_zubat,R.drawable.ic_squirtle,R.drawable.ic_abra,R.drawable.ic_bellsprout,R.drawable.ic_bullbasaur,R.drawable.ic_caterpie,R.drawable.ic_charmander,R.drawable.ic_dratini,R.drawable.ic_eevee,R.drawable.ic_jigglypuff,R.drawable.ic_mankey,R.drawable.ic_meowth,R.drawable.ic_mew,R.drawable.ic_pidgey,R.drawable.ic_pikachu_2,R.drawable.ic_snorlax,R.drawable.ic_psyduck,R.drawable.ic_rattata,R.drawable.ic_zubat,R.drawable.ic_squirtle};
 
 
-    int imagesfourw[]={R.drawable.ic_angry,R.drawable.ic_angel,R.drawable.ic_cool,R.drawable.ic_crying_1,R.drawable.ic_cute,R.drawable.ic_happy_4,R.drawable.ic_in_love,R.drawable.ic_sick,R.drawable.ic_angry,R.drawable.ic_angel,R.drawable.ic_cool,R.drawable.ic_crying_1,R.drawable.ic_cute,R.drawable.ic_happy_4,R.drawable.ic_in_love,R.drawable.ic_sick};
 
-    //int imagessixw[]={R.drawable.ic_angry,R.drawable.ic_angel,R.drawable.ic_cool,R.drawable.ic_crying_1,R.drawable.ic_cute,R.drawable.ic_happy_4,R.drawable.ic_in_love,R.drawable.ic_sick,R.drawable.ic_angry,R.drawable.ic_angel,R.drawable.ic_cool,R.drawable.ic_crying_1,R.drawable.ic_cute,R.drawable.ic_happy_4,R.drawable.ic_in_love,R.drawable.ic_sick,R.drawable.ic_emoji};
+    int imagesfouraux[];
+    int imagessixaux[];
+    int correspondencias4[]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+    int correspondencias6[]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+    int correspondencias4_aux[]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+    int correspondencias6_aux[]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+    boolean back_vector4[]={true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
+    boolean back_vector_aux4[]={true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
+    boolean back_vector6[]={true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
+    boolean back_vector_aux6[]={true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true};
 
-    int correspondencias[]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 
 
-    Thread th = new Thread(new Runnable() {
-        public void run() {
-            try {
-                Thread.sleep(1000);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (theoneflipped.getBackground()==recent.getBackground()) {
-                            recent.setEnabled(false);
-                            recent.setVisibility(View.GONE);
-                            theoneflipped.setEnabled(false);
-                            theoneflipped.setVisibility(View.GONE);
-                            quedan-=2;
-                        }
-                        intentos+=1;
-                        flipper.flipImage(back,recent);
-                        flipper.flipImage(back,theoneflipped);
-                        oneisflipped=false;
-                        theoneflipped=null;
-                        trys.setText(Integer.toString(intentos));
-                    }
-                });
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public void onClick4(View v) {
+        if (!twoflipped) {
+            int which=0;
+            switch (v.getId()) {
+                case R.id.zero:
+                    which=0;
+                    break;
+                case R.id.one:
+                    which=1;
+                    break;
+                case R.id.two:
+                    which=2;
+                    break;
+                case R.id.three:
+                    which=3;
+                    break;
+                case R.id.four:
+                    which=4;
+                    break;
+                case R.id.five:
+                    which=5;
+                    break;
+                case R.id.six:
+                    which=6;
+                    break;
+                case R.id.seven:
+                    which=7;
+                    break;
+                case R.id.eight:
+                    which=8;
+                    break;
+                case R.id.nine:
+                    which=9;
+                    break;
+                case R.id.ten:
+                    which=10;
+                    break;
+                case R.id.eleven:
+                    which=11;
+                    break;
+                case R.id.twelve:
+                    which=12;
+                    break;
+                case R.id.thirteen:
+                    which=13;
+                    break;
+                case R.id.fourteen:
+                    which=14;
+                    break;
+                case R.id.fifteen:
+                    which=15;
+                    break;
             }
-
+            image=getResources().getDrawable(correspondencias4[which]);
+            if (back_vector4[which]) {
+                flipper.flipImage(image,((ImageView)findViewById(v.getId())));
+                recent=((ImageView)findViewById(v.getId()));
+                r=which;
+                onclicked4();
+                back_vector4[which]=!back_vector4[which];
+            }
         }
-    });
+    }
 
-    void onclicked () {
-        if (twoflipped) {
+    public void onClick6(View v) {
+        if (!twoflipped) {
+            int which=0;
+            switch (v.getId()) {
+                case R.id.z0:
+                    which=0;
+                    break;
+                case R.id.z1:
+                    which=1;
+                    break;
+                case R.id.z2:
+                    which=2;
+                    break;
+                case R.id.z3:
+                    which=3;
+                    break;
+                case R.id.z4:
+                    which=4;
+                    break;
+                case R.id.z5:
+                    which=5;
+                    break;
+                case R.id.z6:
+                    which=6;
+                    break;
+                case R.id.z7:
+                    which=7;
+                    break;
+                case R.id.z8:
+                    which=8;
+                    break;
+                case R.id.z9:
+                    which=9;
+                    break;
+                case R.id.z10:
+                    which=10;
+                    break;
+                case R.id.z11:
+                    which=11;
+                    break;
+                case R.id.z12:
+                    which=12;
+                    break;
+                case R.id.z13:
+                    which=13;
+                    break;
+                case R.id.z14:
+                    which=14;
+                    break;
+                case R.id.z15:
+                    which=15;
+                    break;
+                case R.id.z16:
+                    which=16;
+                    break;
+                case R.id.z17:
+                    which=17;
+                    break;
+                case R.id.z18:
+                    which=18;
+                    break;
+                case R.id.z19:
+                    which=19;
+                    break;
+                case R.id.z20:
+                    which=20;
+                    break;
+                case R.id.z21:
+                    which=21;
+                    break;
+                case R.id.z22:
+                    which=22;
+                    break;
+                case R.id.z23:
+                    which=23;
+                    break;
+                case R.id.z24:
+                    which=24;
+                    break;
+                case R.id.z25:
+                    which=25;
+                    break;
+                case R.id.z26:
+                    which=26;
+                    break;
+                case R.id.z27:
+                    which=27;
+                    break;
+                case R.id.z28:
+                    which=28;
+                    break;
+                case R.id.z29:
+                    which=29;
+                    break;
+                case R.id.z30:
+                    which=30;
+                    break;
+                case R.id.z31:
+                    which=31;
+                    break;
+                case R.id.z32:
+                    which=32;
+                    break;
+                case R.id.z33:
+                    which=33;
+                    break;
+                case R.id.z34:
+                    which=34;
+                    break;
+                case R.id.z35:
+                    which=35;
+                    break;
+            }
+            image=getResources().getDrawable(correspondencias6[which]);
+            if (back_vector6[which]) {
+                flipper.flipImage(image,((ImageView)findViewById(v.getId())));
+                recent=((ImageView)findViewById(v.getId()));
+                r=which;
+                onclicked6();
+                back_vector6[which]=!back_vector6[which];
+            }
+        }
+    }
 
-        }else if (oneisflipped) {
+    void onclicked4 () {
+        if (oneisflipped) {
             Thread th = new Thread(new Runnable() {
                 public void run() {
                     try {
@@ -130,7 +262,7 @@ public class Memory extends BaseActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (correspondencias[r]==correspondencias[tof]) {
+                                if (correspondencias4[r]==correspondencias4[tof]) {
                                     recent.setEnabled(false);
                                     recent.setVisibility(View.GONE);
                                     theoneflipped.setEnabled(false);
@@ -139,471 +271,704 @@ public class Memory extends BaseActivity {
                                 }
                                 intentos+=1;
                                 flipper.flipImage(back,recent);
-                                switch (r) {
-                                    case 0:
-                                        back0=true;
-                                        break;
-                                    case 1:
-                                        back1=true;
-                                        break;
-                                    case 2:
-                                        back2=true;
-                                        break;
-                                    case 3:
-                                        back3=true;
-                                        break;
-                                    case 4:
-                                        back4=true;
-                                        break;
-                                    case 5:
-                                        back5=true;
-                                        break;
-                                    case 6:
-                                        back6=true;
-                                        break;
-                                    case 7:
-                                        back7=true;
-                                        break;
-                                    case 8:
-                                        back8=true;
-                                        break;
-                                    case 9:
-                                        back9=true;
-                                        break;
-                                    case 10:
-                                        back10=true;
-                                        break;
-                                    case 11:
-                                        back11=true;
-                                        break;
-                                    case 12:
-                                        back12=true;
-                                        break;
-                                    case 13:
-                                        back13=true;
-                                        break;
-                                    case 14:
-                                        back14=true;
-                                        break;
-                                    case 15:
-                                        back15=true;
-                                        break;
-                                }
+                                back_vector4[r]=true;
                                 flipper.flipImage(back,theoneflipped);
-                                switch (tof) {
-                                    case 0:
-                                        back0=true;
-                                        break;
-                                    case 1:
-                                        back1=true;
-                                        break;
-                                    case 2:
-                                        back2=true;
-                                        break;
-                                    case 3:
-                                        back3=true;
-                                        break;
-                                    case 4:
-                                        back4=true;
-                                        break;
-                                    case 5:
-                                        back5=true;
-                                        break;
-                                    case 6:
-                                        back6=true;
-                                        break;
-                                    case 7:
-                                        back7=true;
-                                        break;
-                                    case 8:
-                                        back8=true;
-                                        break;
-                                    case 9:
-                                        back9=true;
-                                        break;
-                                    case 10:
-                                        back10=true;
-                                        break;
-                                    case 11:
-                                        back11=true;
-                                        break;
-                                    case 12:
-                                        back12=true;
-                                        break;
-                                    case 13:
-                                        back13=true;
-                                        break;
-                                    case 14:
-                                        back14=true;
-                                        break;
-                                    case 15:
-                                        back15=true;
-                                        break;
-                                }
+                                back_vector4[tof]=true;
                                 oneisflipped=false;
                                 theoneflipped=null;
-                                trys.setText(Integer.toString(intentos));
+                                trys4.setText(Integer.toString(intentos));
+                                twoflipped=false;
+                                if (quedan==0) {
+                                    acaba4();
+                                }
                             }
                         });
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
                 }
             });
+            twoflipped=true;
             th.start();
         } else {
             theoneflipped=recent;
             tof=r;
             oneisflipped=true;
         }
-        if (quedan==0) {
-            acaba();
+    }
+
+    void onclicked6 () {
+        if (oneisflipped) {
+            Thread th = new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (correspondencias6[r]==correspondencias6[tof]) {
+                                    recent.setEnabled(false);
+                                    recent.setVisibility(View.GONE);
+                                    theoneflipped.setEnabled(false);
+                                    theoneflipped.setVisibility(View.GONE);
+                                    quedan-=2;
+                                }
+                                intentos+=1;
+                                flipper.flipImage(back,recent);
+                                back_vector6[r]=true;
+                                flipper.flipImage(back,theoneflipped);
+                                back_vector6[tof]=true;
+                                oneisflipped=false;
+                                theoneflipped=null;
+                                trys6.setText(Integer.toString(intentos));
+                                twoflipped=false;
+                                if (quedan==0) {
+                                    acaba6();
+                                }
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            twoflipped=true;
+            th.start();
+        } else {
+            theoneflipped=recent;
+            tof=r;
+            oneisflipped=true;
         }
     }
 
-    void acaba() {
+    void acaba4() {
+        String user=settings.getString("CurrentUser",null);
+        String updateQuery ="UPDATE People SET best_score4="+String.valueOf(intentos)+ " WHERE (best_score4 > "+String.valueOf(intentos)+" OR best_score4=0) AND user = \""+user+"\"";
+        peopledb.getWritableDatabase().execSQL(updateQuery);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Memory.this);
 
-        String user=settings.getString("user",null);
-        String updateQuery ="UPDATE People SET best_score4=? WHERE best_score4 > ? OR best_score4=0 AND user = "+user;
-        Cursor c= peopledb.getWritableDatabase().rawQuery(updateQuery, new String [] {String.valueOf(intentos),String.valueOf(intentos)});
-        c.moveToFirst();
-        c.close();
-    }
+        builder.setTitle("You won!");
+        builder.setMessage("You finally won, GG! You only needed " + String.valueOf(intentos)+" tries (impressive, you f***ing N00B). Do you want to try for a better score?");
 
-    public void clicked0 (View view) {
-        image=getResources().getDrawable(correspondencias[0]);
-        if (!back0) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.zero)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.zero)));
-            recent=zero;
-            r=0;
-            onclicked();
-        }
-        back0=!back0;
-    }
-    public void clicked1 (View view) {
-        image=getResources().getDrawable(correspondencias[1]);
-        if (!back1) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.one)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.one)));
-            recent=one;
-            r=1;
-            onclicked();
-        }
-        back1=!back1;
-    }
-    public void clicked2 (View view) {
-        image=getResources().getDrawable(correspondencias[2]);
-        if (!back2) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.two)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.two)));
-            recent=two;
-            r=2;
-            onclicked();
-        }        back2=!back2;
-    }
-    public void clicked3 (View view) {
-        image=getResources().getDrawable(correspondencias[3]);
-        if (!back3) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.three)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.three)));
-            recent=three;
-            r=3;
-            onclicked();
-        }        back3=!back3;
-    }
-    public void clicked4 (View view) {
-        image=getResources().getDrawable(correspondencias[4]);
-        if (!back4) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.four)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.four)));
-            recent=four;
-            r=4;
-            onclicked();
-        }        back4=!back4;
-    }
-    public void clicked5 (View view) {
-        image=getResources().getDrawable(correspondencias[5]);
-        if (!back5) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.five)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.five)));
-            recent=five;
-            r=5;
-            onclicked();
-        }        back5=!back5;
-    }
-    public void clicked6 (View view) {
-        image=getResources().getDrawable(correspondencias[6]);
-        if (!back6) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.six)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.six)));
-            recent=six;
-            r=6;
-            onclicked();
-        }        back6=!back6;
-    }
-    public void clicked7 (View view) {
-        image=getResources().getDrawable(correspondencias[7]);
-        if (!back7) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.seven)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.seven)));
-            recent=seven;
-            r=7;
-            onclicked();
-        }        back7=!back7;
-    }
-    public void clicked8 (View view) {
-        image=getResources().getDrawable(correspondencias[8]);
-        if (!back8) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.eight)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.eight)));
-            recent=eight;
-            r=8;
-            onclicked();
-        }        back8=!back8;
-    }
-    public void clicked9 (View view) {
-        image=getResources().getDrawable(correspondencias[9]);
-        if (!back9) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.nine)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.nine)));
-            recent=nine;
-            r=9;
-            onclicked();
-        }        back9=!back9;
-    }
-    public void clicked10 (View view) {
-        image=getResources().getDrawable(correspondencias[10]);
-        if (!back10) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.ten)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.ten)));
-            recent=ten;
-            r=10;
-            onclicked();
-        }        back10=!back10;
-    }
-    public void clicked11 (View view) {
-        image=getResources().getDrawable(correspondencias[11]);
-        if (!back11) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.eleven)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.eleven)));
-            recent=eleven;
-            r=11;
-            onclicked();
-        }        back11=!back11;
-    }
-    public void clicked12 (View view) {
-        image=getResources().getDrawable(correspondencias[12]);
-        if (!back12) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.twelve)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.twelve)));
-            recent=twelve;
-            r=12;
-            onclicked();
-        }        back12=!back12;
-    }
-    public void clicked13 (View view) {
-        image=getResources().getDrawable(correspondencias[13]);
-        if (!back13) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.thirteen)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.thirteen)));
-            recent=thirteen;
-            r=13;
-            onclicked();
-        }        back13=!back13;
-    }
-    public void clicked14 (View view) {
-        image=getResources().getDrawable(correspondencias[14]);
-        if (!back14) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.fourteen)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.fourteen)));
-            recent=fourteen;
-            r=14;
-            onclicked();
-        }        back14=!back14;
-    }
-    public void clicked15 (View view) {
-        image=getResources().getDrawable(correspondencias[15]);
-        if (!back15) {
-            flipper.flipImage(back,((ImageView)findViewById(R.id.fifteen)));
-        }
-        else  {
-            flipper.flipImage(image,((ImageView)findViewById(R.id.fifteen)));
-            recent=fifteen;
-            r=15;
-            onclicked();
-        }        back15=!back15;
+        builder.setPositiveButton("Replay!",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        Start();
+                    }
+                });
+        builder.setNegativeButton("Back",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
-    public void startGame() {
-        intentos=0;
+    void acaba6() {
+        String user=settings.getString("CurrentUser",null);
+        String updateQuery ="UPDATE People SET best_score6="+String.valueOf(intentos)+ " WHERE (best_score6 > "+String.valueOf(intentos)+" OR best_score6=0) AND user = \""+user+"\"";
+        peopledb.getWritableDatabase().execSQL(updateQuery);
+        AlertDialog.Builder builder = new AlertDialog.Builder(Memory.this);
+
+        builder.setTitle("You won!");
+        builder.setMessage("You finally won, GG! You only needed " + String.valueOf(intentos)+" tries (impressive, you f***ing N00B). Do you want to try for a better score?");
+
+        builder.setPositiveButton("Replay!",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        Start();
+                    }
+                });
+        builder.setNegativeButton("Back",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void startGame4() {
+        setContentView(R.layout.activity_memory4);
+        ImageView aux;
+        aux=((ImageView)findViewById(R.id.zero));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.one));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.three));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.four));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.five));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.six));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.seven));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.eight));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.nine));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.ten));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.eleven));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.twelve));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.thirteen));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.fourteen));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.fifteen));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+
+        trys4=((TextView)findViewById(R.id.trys4));
         quedan=16;
-        int imagesfourwaux[]=imagesfourw;
+        correspondencias4=correspondencias4_aux;
+        back_vector4=back_vector_aux4;
+        if (ImagePack.equals("emojis")) {
+            imagesfouraux=imagesfoure;
+        } else {
+            imagesfouraux=imagesfourp;
+        }
         Random r=new Random();
         int n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[0]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[0]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[1]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[1]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[2]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[2]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[3]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[3]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[4]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[4]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[5]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[5]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[6]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[6]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[7]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[7]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[8]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[8]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[9]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[9]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[10]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[10]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[11]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[11]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[12]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[12]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[13]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[13]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[14]=imagesfourwaux[n];
-        imagesfourwaux[n]=-1;
+        correspondencias4[14]=imagesfouraux[n];
+        imagesfouraux[n]=-1;
         n=r.nextInt(16);
-        while (imagesfourwaux[n]==-1) {
+        while (imagesfouraux[n]==-1) {
             n=r.nextInt(16);
         }
-        correspondencias[15]=imagesfourwaux[n];
+        correspondencias4[15]=imagesfouraux[n];
     }
 
-    public void setUpViews () {
+    public void startGame6() {
+        setContentView(R.layout.activity_memory6);
+        ImageView aux;
+        aux=((ImageView)findViewById(R.id.z0));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z1));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z2));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z3));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z4));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z5));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z6));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z7));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z8));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z9));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z10));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z11));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z12));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z13));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z14));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z15));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z16));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z17));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z18));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z19));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z20));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z21));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z22));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z23));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z24));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z25));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z26));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z27));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z28));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z29));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z30));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z31));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z32));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z33));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z34));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        aux=((ImageView)findViewById(R.id.z35));
+        aux.setEnabled(true);
+        flipper.flipImage(back,aux);
+        aux.setVisibility(View.VISIBLE);
+        trys6=((TextView)findViewById(R.id.trys6));
+        quedan=36;
+        back_vector6=back_vector_aux6;
+        correspondencias6=correspondencias6_aux;
+        if (ImagePack.equals("emojis")) {
+            imagessixaux=imagessixe;
+        } else {
+            imagessixaux=imagessixp;
+        }
+        Log.v("hey!!!","no sabes lo que he pasado111111111111");
+        Random r=new Random();
+        int n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[0]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[1]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[2]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[3]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[4]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[5]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[6]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[7]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[8]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[9]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[10]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[11]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[12]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[13]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[14]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[15]=imagessixaux[n];
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[16]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[17]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[18]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[19]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[20]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[21]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[22]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[23]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[24]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[25]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[26]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[27]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[28]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[29]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[30]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[31]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[32]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[33]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[34]=imagessixaux[n];
+        imagessixaux[n]=-1;
+        n=r.nextInt(36);
+        while (imagessixaux[n]==-1) {
+            n=r.nextInt(36);
+        }
+        correspondencias6[35]=imagessixaux[n];
+    }
 
-        zero=((ImageView)findViewById(R.id.zero));
-        one=((ImageView)findViewById(R.id.one));
-        two=((ImageView)findViewById(R.id.two));
-        three=((ImageView)findViewById(R.id.three));
-        four=((ImageView)findViewById(R.id.four));
-        five=((ImageView)findViewById(R.id.five));
-        six=((ImageView)findViewById(R.id.six));
-        seven=((ImageView)findViewById(R.id.seven));
-        eight=((ImageView)findViewById(R.id.eight));
-        nine=((ImageView)findViewById(R.id.nine));
-        ten=((ImageView)findViewById(R.id.ten));
-        eleven=((ImageView)findViewById(R.id.eleven));
-        twelve=((ImageView)findViewById(R.id.twelve));
-        thirteen=((ImageView)findViewById(R.id.thirteen));
-        fourteen=((ImageView)findViewById(R.id.fourteen));
-        fifteen=((ImageView)findViewById(R.id.fifteen));
-
-        trys=((TextView)findViewById(R.id.trys));
-        trys.setText(Integer.toString(intentos));
-
+    protected void Start() {
+        intentos=0;
+        oneisflipped=false;
+        twoflipped=false;
+        settings=null;
+        settings=this.getSharedPreferences("MYAPP", Context.MODE_PRIVATE);
+        ImagePack=settings.getString("Images_pack","emojis");
+        GameMode=settings.getInt("GameMode",4);
+        if (GameMode==4) {
+            startGame4();
+        } else {
+            startGame6();
+        }
     }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_memory4);
         peopledb=new peopleDB(this);
-        setUpViews();
-        settings=this.getSharedPreferences("MYAPP", Context.MODE_PRIVATE);
         flipper= new CoolImageFlipper(this);
         back=getResources().getDrawable(R.drawable.ic_interr);
-        startGame();
+        Start();
     }
 
     @Override
@@ -615,14 +980,138 @@ public class Memory extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.size:
-                //poner dialog list!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            case R.id.four:
+                if (GameMode==6) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Memory.this);
+
+                    builder.setTitle("Changing difficulty to easy");
+                    builder.setMessage("Are you sure? All progress will be lost and will count as a failed try!");
+
+                    builder.setPositiveButton("Restart",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+
+                                    SharedPreferences.Editor edit=settings.edit();
+                                    edit.putInt("GameMode",4);
+                                    edit.apply();
+                                    Start();
+                                }
+                            });
+                    builder.setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
                 return true;
-            case R.id.images:
-                //poner dialog list!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            case R.id.six:
+                if (GameMode==4) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Memory.this);
+
+                    builder.setTitle("Changing difficulty to hard");
+                    builder.setMessage("Are you sure? All progress will be lost and will count as a failed try!");
+
+                    builder.setPositiveButton("Restart",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+
+                                    SharedPreferences.Editor edit=settings.edit();
+                                    edit.putInt("GameMode",4);
+                                    edit.apply();
+                                    Start();
+                                }
+                            });
+                    builder.setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
                 return true;
-            case R.id.reset:
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+            case R.id.emojis:
+                if (ImagePack.equals("pokemons")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Memory.this);
+
+                    builder.setTitle("Changing images to emojis");
+                    builder.setMessage("Are you sure? All progress will be lost and will count as a failed try!");
+
+                    builder.setPositiveButton("Change",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+
+
+                                    SharedPreferences.Editor edit=settings.edit();
+                                    edit.putString("Images_pack","emojis");
+                                    edit.apply();
+                                    Start();
+                                }
+                            });
+                    builder.setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();;
+                }
+                return true;
+            case R.id.pokemons:
+                if (ImagePack.equals("emojis")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Memory.this);
+
+                    builder.setTitle("Changing images to Pokemons");
+                    builder.setMessage("Are you sure? All progress will be lost and will count as a failed try!");
+
+                    builder.setPositiveButton("Change",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+
+
+                                    SharedPreferences.Editor edit=settings.edit();
+                                    edit.putString("Images_pack","emojis");
+                                    edit.apply();
+                                    Start();
+                                }
+                            });
+                    builder.setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                return true;
+            case R.id.restart:
+                AlertDialog.Builder builder = new AlertDialog.Builder(Memory.this);
 
                 builder.setTitle("Restart");
                 builder.setMessage("Are you sure? All progress will be lost and will count as a failed try!");
@@ -633,8 +1122,7 @@ public class Memory extends BaseActivity {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
                                 //poner un intento más!!!!!!!!!!!!!!!!!
-                                startGame();
-
+                                Start();
                             }
                         });
                 builder.setNegativeButton("Cancel",
@@ -651,6 +1139,27 @@ public class Memory extends BaseActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntArray("correspondencias4",correspondencias4);
+        outState.putIntArray("correspondencias6",correspondencias6);
+        outState.putBooleanArray("back_vector4",back_vector4);
+        outState.putBooleanArray("back_vector6",back_vector6);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState==null) {
+            correspondencias4=savedInstanceState.getIntArray("correspondencias4");
+            correspondencias6=savedInstanceState.getIntArray("correspondencias6");
+            back_vector4=savedInstanceState.getBooleanArray("back_vector4");
+            back_vector6=savedInstanceState.getBooleanArray("back_vector6");
         }
     }
 }

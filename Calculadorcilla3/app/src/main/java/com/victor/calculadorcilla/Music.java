@@ -1,6 +1,8 @@
 package com.victor.calculadorcilla;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ public class Music extends Fragment implements View.OnClickListener {
     ImageView play;
     ImageView stop;
     ImageView skip;
+    SharedPreferences settings;
 
     Boolean playing = false;
     Boolean started = false;
@@ -42,6 +45,7 @@ public class Music extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootview = inflater.inflate(R.layout.fragment_music, container, false);
+        settings=getActivity().getSharedPreferences("MYAPP", Context.MODE_PRIVATE);
         play = ((ImageView) rootview.findViewById(R.id.play));
         stop = ((ImageView) rootview.findViewById(R.id.stop));
         skip = ((ImageView) rootview.findViewById(R.id.skip));
@@ -93,5 +97,14 @@ public class Music extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        SharedPreferences.Editor editor=settings.edit();
+        editor.putString("curr_fragment","Music");
+        editor.apply();
+    }
+
 }
 

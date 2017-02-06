@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
     <item
         android:id="@+id/size"
-        android:title="Change size"/>
+        android:title="Change size"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_apps_black_24dp">
+        <menu>
+            <item
+                android:id="@+id/four"
+                android:title="Change to 4x4">
+            </item>
+            <item
+                android:id="@+id/six"
+                android:title="Change to 6x6">
+            </item>
 
+        </menu>
+    </item>
     <item
         android:id="@+id/images"
-        android:title="Images"/>
+        android:title="Images"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_photo_black_24dp">
+        <menu>
+            <item
+                android:id="@+id/emojis"
+                android:title="Use emojis">
+            </item>
+            <item
+                android:id="@+id/pokemons"
+                android:title="Use pokemons">
+            </item>
+
+        </menu>
+    </item>
 
     <item
-        android:id="@+id/reset"
-        android:title="Reset"/>
-
-</menu>
+        android:id="@+id/restart"
+        android:title="Restart"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_autorenew_black_24dp"/>
+    </menu>

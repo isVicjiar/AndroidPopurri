@@ -5,15 +5,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/androidpopurrifondo">
 
-    <Button
-        android:text="Start"
-        android:id="@+id/s"
-        android:onClick="onClick (DECIDELOGIN)"
-        android:layout_width="80dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="28dp"
+    <ImageView
+        app:srcCompat="@drawable/icono"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="17dp"
+        android:id="@+id/imageView4"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
-
 </RelativeLayout>

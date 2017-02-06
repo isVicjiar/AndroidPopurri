@@ -1,12 +1,14 @@
 package com.victor.calculadorcilla;
 
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +27,9 @@ import android.widget.Toast;
  */
 public class Calculator extends Fragment implements View.OnClickListener {
 
+
+
+    String not;
 
     Button button1;
     Button button2;
@@ -273,7 +278,31 @@ public class Calculator extends Fragment implements View.OnClickListener {
                         case '/':
                             if (aux2==0) {
 
-                                s="You can't divide by zero!";
+                                s="0";
+                                not=settings.getString("notifications","Toast");
+                                if (not.equals("Toast")) {
+                                    Toast.makeText(getActivity().getApplicationContext(),"You can't divide by zero!",Toast.LENGTH_LONG).show();
+                                } else {
+                                    //NOTIFICACION DE BARRA
+                                    //Entero que nos permite identificar la notificación
+                                    int mId = 1;
+                                    //Instanciamos Notification Manager
+                                    NotificationManager mNotificationManager =
+                                            (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+                                    // Para la notificaciones, en lugar de crearlas directamente, lo hacemos mediante
+                                    // un Builder/contructor.
+                                    NotificationCompat.Builder mBuilder =
+                                            new NotificationCompat.Builder(getActivity().getApplicationContext())
+                                                    .setSmallIcon(R.drawable.ic_infinite_sign)
+                                                    .setContentTitle("Math error")
+                                                    .setContentText("You can't divide by zero!");
+
+                                    // mId nos permite actualizar las notificaciones en un futuro
+                                    // Notificamos
+                                    mNotificationManager.notify(mId, mBuilder.build());
+                                }
                                 usarr=0;
                             }
                             else {
@@ -432,7 +461,7 @@ public class Calculator extends Fragment implements View.OnClickListener {
                 break;
             case R.id.toast:
                 SharedPreferences.Editor editor=settings.edit();
-                editor.putString("notifications","toast");
+                editor.putString("notifications","Toast");
                 editor.apply();
                 prueba=true;
                 break;

@@ -2,7 +2,11 @@ package com.victor.calculadorcilla;
 
 
 import android.Manifest;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -14,7 +18,10 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,11 +44,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Home extends Fragment {
 
     Context context;
+    SharedPreferences settings;
+    String not;
 
     String appid="59c89b5cecab0b9fd0a25c25bef43f45";
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .baseUrl("http://api.openweathermap.org/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
@@ -66,13 +75,43 @@ public class Home extends Fragment {
         service.getWeather(String.valueOf(lati), String.valueOf(longi), appid).enqueue(new Callback<WeatherMessage>() {
             @Override
             public void onResponse(Call<WeatherMessage> call, Response<WeatherMessage> response) {
-                String weather = response.body().getMessage();
-                ((TextView)rootview.findViewById(R.id.loc)).setText(weather);
+                if (response.isSuccessful()) {
+                    String weather = response.body().getName();
+                    ((TextView)rootview.findViewById(R.id.city)).setText(weather);
+                    //String temp = response.body().getMain().getTemp();
+                    //((TextView)rootview.findViewById(R.id.temperature)).setText(temp);
+                } else {
+                    Log.d("ERROR",response.code()+response.message());
+                }
+
             }
 
             @Override
             public void onFailure(Call<WeatherMessage> call, Throwable t) {
-                Toast.makeText(context,"Error on request",Toast.LENGTH_LONG).show();
+                not=settings.getString("notifications","Toast");
+                if (not.equals("Toast")) {
+                    Toast.makeText(context,"Error on request",Toast.LENGTH_LONG).show();
+                } else {
+                    //NOTIFICACION DE BARRA
+                    //Entero que nos permite identificar la notificación
+                    int mId = 1;
+                    //Instanciamos Notification Manager
+                    NotificationManager mNotificationManager =
+                            (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+                    // Para la notificaciones, en lugar de crearlas directamente, lo hacemos mediante
+                    // un Builder/contructor.
+                    NotificationCompat.Builder mBuilder =
+                            new NotificationCompat.Builder(getActivity().getApplicationContext())
+                                    .setSmallIcon(R.drawable.icono)
+                                    .setContentTitle("Error")
+                                    .setContentText("Request failed");
+
+                    // mId nos permite actualizar las notificaciones en un futuro
+                    // Notificamos
+                    mNotificationManager.notify(mId, mBuilder.build());
+                }
             }
         });
     }
@@ -84,6 +123,7 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootview=inflater.inflate(R.layout.fragment_home, container, false);
+        settings=getActivity().getSharedPreferences("MYAPP", Context.MODE_PRIVATE);
         addressList = null;
         context=this.getActivity().getApplicationContext();
 
@@ -113,6 +153,7 @@ public class Home extends Fragment {
                     lati=location.getLatitude();
                     addressList = gc.getFromLocation(location.getLatitude(),
                             location.getLongitude(), 5);
+                    getWeather();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -130,7 +171,6 @@ public class Home extends Fragment {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         }
 
-        getWeather();
 
         return rootview;
     }
@@ -141,5 +181,14 @@ public class Home extends Fragment {
         locationManager = null;
         locationListener = null;
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        SharedPreferences.Editor editor=settings.edit();
+        editor.putString("curr_fragment","Home");
+        editor.apply();
+    }
+
 
 }

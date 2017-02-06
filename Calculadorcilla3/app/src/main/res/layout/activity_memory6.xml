@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/fondoapp">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_mem"
-        android:title="Memory"
-        android:minHeight="?attr/actionBarSize"
-        android:background="@android:color/black"
-        android:titleTextColor="#ffffff"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="46dp">
+
+        <TextView
+            android:text="0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/trys6"
+            android:textSize="30sp"
+            android:textColor="@android:color/black"
+            android:textAlignment="center" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,13 +37,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button25"
+                <ImageView
+                    android:id="@+id/z0"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,13 +52,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button34"
+                <ImageView
+                    android:id="@+id/z6"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,13 +67,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button40"
+                <ImageView
+                    android:id="@+id/z12"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,13 +82,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button46"
+                <ImageView
+                    android:id="@+id/z18"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,13 +97,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button52"
+                <ImageView
+                    android:id="@+id/z24"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,105 +112,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button58"
+                <ImageView
+                    android:id="@+id/z30"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button26"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button35"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button41"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button47"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button53"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button59"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
         </LinearLayout>
 
@@ -216,13 +135,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button28"
+                <ImageView
+                    android:id="@+id/z1"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -230,13 +150,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button36"
+                <ImageView
+                    android:id="@+id/z7"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -244,13 +165,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button42"
+                <ImageView
+                    android:id="@+id/z13"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -258,13 +180,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button48"
+                <ImageView
+                    android:id="@+id/z19"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -272,13 +195,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button54"
+                <ImageView
+                    android:id="@+id/z25"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -286,105 +210,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button60"
+                <ImageView
+                    android:id="@+id/z31"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button27"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button37"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button43"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button49"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button55"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button61"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical|fill_horizontal"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
         </LinearLayout>
 
@@ -400,13 +233,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button29"
+                <ImageView
+                    android:id="@+id/z2"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -414,13 +248,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button38"
+                <ImageView
+                    android:id="@+id/z8"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -428,26 +263,224 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button44"
+                <ImageView
+                    android:id="@+id/z14"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z20"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z26"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z32"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z3"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z9"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z15"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z21"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z27"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z33"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z4"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z10"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/z16"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical|fill_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="86dp"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button50"
+                <ImageView
+                    android:id="@+id/z22"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -455,13 +488,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button56"
+                <ImageView
+                    android:id="@+id/z28"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -469,13 +503,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button62"
+                <ImageView
+                    android:id="@+id/z34"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
         </LinearLayout>
 
@@ -491,13 +526,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button33"
+                <ImageView
+                    android:id="@+id/z5"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -505,13 +541,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button39"
+                <ImageView
+                    android:id="@+id/z11"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -519,13 +556,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button45"
+                <ImageView
+                    android:id="@+id/z17"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -533,13 +571,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button51"
+                <ImageView
+                    android:id="@+id/z23"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -547,13 +586,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button57"
+                <ImageView
+                    android:id="@+id/z29"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -561,13 +601,14 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <Button
-                    android:id="@+id/button63"
+                <ImageView
+                    android:id="@+id/z35"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical|fill_horizontal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@android:drawable/btn_dialog" />
+                    android:background="@drawable/ic_interr"
+                    android:onClick="onClick6" />
             </LinearLayout>
         </LinearLayout>
 

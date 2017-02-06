@@ -155,4 +155,13 @@ public class Profile extends Fragment {
         locationManager = null;
         locationListener = null;
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        SharedPreferences.Editor editor=settings.edit();
+        editor.putString("curr_fragment","Profile");
+        editor.apply();
+    }
+
 }

@@ -23,11 +23,11 @@ public class DECIDELOGIN extends Activity implements View.OnClickListener{
 
 
     SharedPreferences settings;
-    Button start;
+    String currentuser;
 
     @Override
     public void onClick (View v) {
-        String currentuser = settings.getString("CurrentUser", null);
+
 
         Intent i = new Intent();
         if (currentuser==null) {
@@ -51,8 +51,31 @@ public class DECIDELOGIN extends Activity implements View.OnClickListener{
         //Instanciamos el SharedPreferences
         settings = getSharedPreferences("MYAPP", Context.MODE_PRIVATE);
         //Consultamos
-
-        start=((Button)findViewById(R.id.s));
-        start.setOnClickListener(this);
+        currentuser = settings.getString("CurrentUser", null);
+        Thread th = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent i = new Intent();
+                            if (currentuser==null) {
+                                i = new Intent(getApplicationContext(), Login.class);
+                                startActivity(i);
+                                finish();
+                            } else {
+                                i = new Intent(getApplicationContext(), Select_Activity.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        th.start();
     }
 }
