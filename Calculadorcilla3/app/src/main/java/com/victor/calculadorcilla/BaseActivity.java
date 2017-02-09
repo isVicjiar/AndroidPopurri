@@ -66,27 +66,12 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         switch (id){
-
-            case R.id.home:
-                if (this instanceof Select_Activity) {
-                    Fragment fi=new Home();
-                    ((Toolbar)findViewById(R.id.toolbar)).setTitle("Home");
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fi,"MEMORY_FRAGMENT").commit();
-                } else {
-                    SharedPreferences.Editor editor=settings.edit();
-                    editor.putString("curr_fragment","Home");
-                    editor.apply();
-                    Intent i=new Intent(this,Select_Activity.class);
-                    startActivity(i);
-                    finish();
-                }
-                break;
-
             case R.id.calculator:
                 if (this instanceof Select_Activity) {
                     Fragment fi=new Calculator();
                     ((Toolbar)findViewById(R.id.toolbar)).setTitle("Calculator");
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fi,"MEMORY_FRAGMENT").commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            fi,"MEMORY_FRAGMENT").commit();
                 } else {
                     SharedPreferences.Editor editor=settings.edit();
                     editor.putString("curr_fragment","Calculator");
@@ -101,7 +86,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 if (this instanceof Select_Activity) {
                     Fragment fi=new Music();
                     ((Toolbar)findViewById(R.id.toolbar)).setTitle("Music");
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fi,"MEMORY_FRAGMENT").commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            fi,"MEMORY_FRAGMENT").commit();
                 } else {
                     SharedPreferences.Editor editor=settings.edit();
                     editor.putString("curr_fragment","Music");
@@ -117,7 +103,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 if (this instanceof Select_Activity) {
                     Fragment fi=new Game();
                     ((Toolbar)findViewById(R.id.toolbar)).setTitle("Game");
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fi,"MEMORY_FRAGMENT").commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            fi,"MEMORY_FRAGMENT").commit();
                 } else {
                     SharedPreferences.Editor editor=settings.edit();
                     editor.putString("curr_fragment","Game");
@@ -132,7 +119,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 if (this instanceof Select_Activity) {
                     Fragment fi=new Profile();
                     ((Toolbar)findViewById(R.id.toolbar)).setTitle("Profile");
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fi,"MEMORY_FRAGMENT").commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            fi,"MEMORY_FRAGMENT").commit();
                 } else {
                     SharedPreferences.Editor editor=settings.edit();
                     editor.putString("curr_fragment","Profile");
@@ -185,7 +173,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void setContentView(int layoutResID) {
 
-        DrawerLayout fullLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
+        DrawerLayout fullLayout = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base,
+                null);
         FrameLayout frameLayout = (FrameLayout) fullLayout.findViewById(R.id.frame_layout_base);
 
         getLayoutInflater().inflate(layoutResID, frameLayout, true);

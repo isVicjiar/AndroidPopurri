@@ -1,15 +1,11 @@
 package com.victor.calculadorcilla;
 
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,13 +23,11 @@ import java.io.IOException;
 public class Music extends Fragment implements View.OnClickListener {
 
     View rootview;
+    MediaPlayer mediaPlayer = new MediaPlayer();
     ImageView play;
     ImageView stop;
     ImageView skip;
     SharedPreferences settings;
-    private Intent music;
-    private MyService myService;
-    private Boolean musicBound=false;
 
     Boolean playing = false;
     Boolean started = false;
@@ -61,41 +55,37 @@ public class Music extends Fragment implements View.OnClickListener {
         flipper= new CoolImageFlipper(getActivity());
         playbutton=getResources().getDrawable(R.drawable.ic_play_button);
         pausebutton=getResources().getDrawable(R.drawable.ic_pause);
+        mediaPlayer = MediaPlayer.create(getActivity(), R.raw.trololo_song);
         return rootview;
     }
-
-    private ServiceConnection musicConnection=new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            MyService.MusicBinder binder=(MyService.MusicBinder)service;
-            myService=binder.getService();
-            musicBound=true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            musicBound=false;
-        }
-    };
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.play:
                 if (playing) {
-                    getActivity().stopService(music);
+                    mediaPlayer.pause();
                     playing = false;
                     flipper.flipImage(playbutton,((ImageView)rootview.findViewById(R.id.play)));
                 } else {
-                    if (music==null) {
-                        music=new Intent(getActivity(),MyService.class);
-                        myService.bindService(music,musicConnection,Context.BIND_AUTO_CREATE);
+                    mediaPlayer.start();
+                    playing = true;
+                    flipper.flipImage(pausebutton,((ImageView)rootview.findViewById(R.id.play)));
+                    if (!started) {
+                        ((TextView) rootview.findViewById(R.id.song_name)).setText("Trololo song");
+                        started=true;
                     }
                 }
                 break;
             case R.id.stop:
-                if (playing && started) {
-                    getActivity().stopService(music);
+                if (started) {
+                    mediaPlayer.pause();
+                    mediaPlayer.stop();
+                    try {
+                        mediaPlayer.prepare();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     started = false;
                     playing=false;
                     flipper.flipImage(playbutton,((ImageView)rootview.findViewById(R.id.play)));
@@ -104,7 +94,7 @@ public class Music extends Fragment implements View.OnClickListener {
                 break;
             case R.id.skip:
                 if (playing && started) {
-                    getActivity().stopService(music);
+                    mediaPlayer.stop();
                     started = false;
                     playing=false;
                     flipper.flipImage(playbutton,((ImageView)rootview.findViewById(R.id.play)));

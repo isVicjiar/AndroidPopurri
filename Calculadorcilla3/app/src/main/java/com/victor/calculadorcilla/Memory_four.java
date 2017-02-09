@@ -31,7 +31,6 @@ public class Memory_four extends Fragment implements View.OnClickListener {
 
     int GameMode;
     String ImagePack;
-    peopleDB peopledb;
     SharedPreferences settings;
     TextView trys4;
     View rootview;
@@ -398,7 +397,6 @@ public class Memory_four extends Fragment implements View.OnClickListener {
 
         super.onCreate(savedInstanceState);
         rootview=inflater.inflate(R.layout.fragment_memory4, container, false);
-        peopledb=new peopleDB(getActivity());
         realm= Realm.getDefaultInstance();
         ((ImageView)rootview.findViewById(R.id.zero)).setOnClickListener(this);
         ((ImageView)rootview.findViewById(R.id.one)).setOnClickListener(this);

@@ -1,15 +1,27 @@
 package com.victor.calculadorcilla;
 
 
+import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.media.AudioTrack;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,7 +37,7 @@ import static android.support.v7.recyclerview.R.styleable.RecyclerView;
 public class Rank_Four extends Fragment {
 
 
-    ArrayList<Player> players =new ArrayList<>();
+    ArrayList<Player> players = new ArrayList<>();
     View rootview;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
@@ -36,17 +48,17 @@ public class Rank_Four extends Fragment {
     }
 
     public void getRanking() {
-        RealmResults realmResults=realm.allObjects(User.class);
+        RealmResults realmResults = realm.allObjects(User.class);
         realmResults.sort("best_score4");
         if (!realmResults.isEmpty()) {
             User u;
-            for (int i=0; i<realmResults.size(); ++i) {
-                u= (User) realmResults.get(i);
-                String user=u.getName();
-                String photo=u.getPhoto();
-                int best_score=u.getBest_score4();
-                if (best_score!=0) {
-                    Player p=new Player(photo,user,best_score);
+            for (int i = 0; i < realmResults.size(); ++i) {
+                u = (User) realmResults.get(i);
+                String user = u.getName();
+                String photo = u.getPhoto();
+                int best_score = u.getBest_score4();
+                if (best_score != 0) {
+                    Player p = new Player(photo, user, best_score);
                     players.add(p);
                 }
             }
@@ -57,9 +69,10 @@ public class Rank_Four extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootview=inflater.inflate(R.layout.fragment_rank__four, container, false);
+        rootview = inflater.inflate(R.layout.fragment_rank__four, container, false);
         // Inflate the layout for this fragment
-        realm= Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance();
+        setHasOptionsMenu(true);
         getRanking();
 
         //findViewById del layout activity_main
@@ -81,4 +94,54 @@ public class Rank_Four extends Fragment {
         return rootview;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.menu_rank, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.reset:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setTitle("Reset stats");
+                builder.setMessage("Are you sure you want to reset stats? All progress will be lost");
+
+                builder.setPositiveButton("Reset!",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+
+                                RealmResults realmResults = realm.allObjects(User.class);
+                                if (!realmResults.isEmpty()) {
+                                    User u;
+                                    for (int i = 0; i < realmResults.size(); ++i) {
+                                        User current=(User) realmResults.get(i);
+                                        realm.beginTransaction();
+                                        current.setBest_score4(0);
+                                        realm.copyToRealmOrUpdate(current);
+                                        realm.commitTransaction();
+                                    }
+                                }
+                            }
+                        });
+                builder.setNegativeButton("Back",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
+
+        }
+        return true;
+    }
 }

@@ -40,8 +40,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
     EditText user;
     EditText pass;
-
-    peopleDB peopledb;
     SharedPreferences settings;
 
 
@@ -71,8 +69,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
         user=((EditText)findViewById(R.id.editUser));
         pass=((EditText)findViewById(R.id.editPass));
-
-        peopledb=new peopleDB(getApplicationContext());
 
 
 
@@ -136,14 +132,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     //REGISTER
     public void addUser(View view) {
         if (user.getText().toString().equals("")||pass.getText().toString().equals("")) {
-            Toast.makeText(getApplicationContext(), R.string.missing_text, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),
+                    R.string.missing_text, Toast.LENGTH_SHORT).show();
         } else {
 
             String pa=String.valueOf(pass.getText());
             String u=user.getText().toString();
             RealmResults realmResults=realm.where(User.class).equalTo("name", u).findAll();
             if (!realmResults.isEmpty()) {
-                Toast.makeText(getApplicationContext(), "That user is already in our database!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "That user is already in our database!",
+                        Toast.LENGTH_LONG).show();
             } else {
                 User user = new User();
                 user.setName(u);
@@ -169,13 +167,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     //ENTER
     public void entertry(View view) {
         if (user.getText().toString().equals("")||pass.getText().toString().equals("")) {
-            Toast.makeText(getApplicationContext(), R.string.missing_text, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),
+                    R.string.missing_text, Toast.LENGTH_SHORT).show();
         } else {
             String pa=String.valueOf(pass.getText());
             String u=user.getText().toString();
             RealmResults realmResults=realm.where(User.class).equalTo("name", u).findAll();
             if (realmResults.isEmpty()) {
-                Toast.makeText(getApplicationContext(), R.string.wrong_user, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.wrong_user,
+                        Toast.LENGTH_SHORT).show();
             }
             else {
                 User comp= (User) realmResults.first();

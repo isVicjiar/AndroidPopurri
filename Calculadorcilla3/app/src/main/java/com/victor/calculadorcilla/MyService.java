@@ -9,7 +9,8 @@ import android.support.annotation.Nullable;
 
 import java.io.IOException;
 
-public class MyService extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
+public class MyService extends Service implements MediaPlayer.OnPreparedListener,
+        MediaPlayer.OnCompletionListener {
     private static final String ACTION_PLAY = "com.example.action.PLAY";
     private MediaPlayer mediaPlayer;
     private int songPosn;

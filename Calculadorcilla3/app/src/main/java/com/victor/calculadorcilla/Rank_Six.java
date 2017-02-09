@@ -1,6 +1,8 @@
 package com.victor.calculadorcilla;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.media.AudioTrack;
 import android.os.Bundle;
@@ -8,6 +10,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -58,27 +63,68 @@ public class Rank_Six extends Fragment {
                              Bundle savedInstanceState) {
 
         rootview=inflater.inflate(R.layout.fragment_rank__four, container, false);
-        // Inflate the layout for this fragment
+        setHasOptionsMenu(true);
         realm= Realm.getDefaultInstance();
         getRanking();
 
-        //findViewById del layout activity_main
         mRecyclerView = (RecyclerView) rootview.findViewById(R.id.mRecyclerView);
 
-        //LinearLayoutManager necesita el contexto de la Activity.
-        //El LayoutManager se encarga de posicionar los items dentro del recyclerview
-        //Y de definir la politica de reciclaje de los items no visibles.
         mLinearLayout = new LinearLayoutManager(getActivity());
 
-        //Asignamos el LinearLayoutManager al recycler:
         mRecyclerView.setLayoutManager(mLinearLayout);
 
 
-        //El adapter se encarga de  adaptar un objeto definido en el c�digo a una vista en xml
-        //seg�n la estructura definida.
-        //Asignamos nuestro custom Adapter
         mRecyclerView.setAdapter(new MyCustomAdapter(players));
         return rootview;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.menu_rank, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.reset:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setTitle("Reset stats");
+                builder.setMessage("Are you sure you want to reset stats? All progress will be lost");
+
+                builder.setPositiveButton("Reset!",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                RealmResults realmResults = realm.allObjects(User.class);
+                                if (!realmResults.isEmpty()) {
+                                    User u;
+                                    for (int i = 0; i < realmResults.size(); ++i) {
+                                        User current=(User) realmResults.get(i);
+                                        realm.beginTransaction();
+                                        current.setBest_score6(0);
+                                        realm.copyToRealmOrUpdate(current);
+                                        realm.commitTransaction();
+                                    }
+                                }
+                            }
+                        });
+                builder.setNegativeButton("Back",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
+
+        }
+        return true;
+    }
 }

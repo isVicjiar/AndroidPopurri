@@ -282,22 +282,25 @@ public class Calculator extends Fragment implements View.OnClickListener {
                             if (aux2==0) {
 
                                 s="0";
-                                not=settings.getString("notifications","Toast");
-                                if (not.equals("Toast")) {
-                                    Toast.makeText(getActivity().getApplicationContext(),"You can't divide by zero!",Toast.LENGTH_LONG).show();
+                                not=settings.getString("notifications","toast");
+                                if (not.equals("toast")) {
+                                    Toast.makeText(getActivity().getApplicationContext(),
+                                            "You can't divide by zero!",Toast.LENGTH_LONG).show();
                                 } else {
                                     //NOTIFICACION DE BARRA
                                     //Entero que nos permite identificar la notificación
                                     int mId = 1;
                                     //Instanciamos Notification Manager
                                     NotificationManager mNotificationManager =
-                                            (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                                            (NotificationManager) getActivity().
+                                                    getSystemService(Context.NOTIFICATION_SERVICE);
 
 
                                     // Para la notificaciones, en lugar de crearlas directamente, lo hacemos mediante
                                     // un Builder/contructor.
                                     NotificationCompat.Builder mBuilder =
-                                            new NotificationCompat.Builder(getActivity().getApplicationContext())
+                                            new NotificationCompat.Builder
+                                                    (getActivity().getApplicationContext())
                                                     .setSmallIcon(R.drawable.ic_infinite_sign)
                                                     .setContentTitle("Math error")
                                                     .setContentText("You can't divide by zero!");

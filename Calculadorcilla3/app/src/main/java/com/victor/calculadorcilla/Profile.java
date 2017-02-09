@@ -85,18 +85,23 @@ public class Profile extends Fragment{
         String i_path = pu.getPhoto();
         if (i_path != null) {
             Uri mUri = Uri.parse(i_path);
-            try {
+            /*try {
                 int permissionCheck = ContextCompat.checkSelfPermission(getActivity(),
                         Manifest.permission.MANAGE_DOCUMENTS);
                 if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.MANAGE_DOCUMENTS}, 0);
-//                    photo.setImageBitmap(MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), mUri));
+                    ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.MANAGE_DOCUMENTS}, 0);
+//                    photo.setImageBitmap(MediaStore.Images.Media.
+getBitmap(getActivity().getContentResolver(), mUri));
                 } else {
-                    photo.setImageBitmap(MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), mUri));
+                    photo.setImageBitmap(MediaStore.Images.Media.
+                    getBitmap(getActivity().getContentResolver(), mUri));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
+        } else {
+            photo.setBackgroundResource(R.drawable.ic_angry);
         }
     }
 
@@ -171,14 +176,23 @@ public class Profile extends Fragment{
         };
 
         //provider, tiempo, distancia, listener
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission( context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        if (ActivityCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission( context,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this.getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                    0, 0, locationListener);
 
         } else {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                    0, 0, locationListener);
         }
 
         return rootview;
@@ -203,7 +217,8 @@ public class Profile extends Fragment{
                     realm.copyToRealmOrUpdate(current);
                     realm.commitTransaction();
                     photo.setImageResource(android.R.color.transparent);
-                    photo.setImageBitmap(MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage));
+                    photo.setImageBitmap(MediaStore.Images.Media.
+                            getBitmap(getActivity().getContentResolver(), selectedImage));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
-        android:id="@+id/home"
-        android:title="Home">
+        android:id="@+id/profile"
+        android:title="Profile">
     </item>
     <item
         android:id="@+id/calculator"
@@ -17,10 +16,7 @@
         android:id="@+id/game"
         android:title="Game">
         </item>
-    <item
-        android:id="@+id/profile"
-        android:title="Profile">
-        </item>
+
     <item
         android:id="@+id/loggout"
         android:title="Log Out">

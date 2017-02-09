@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Select_Activity" />
+        <activity android:name=".Select_Activity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Login" />
         <activity android:name=".Memory"
             android:screenOrientation="portrait"/>
