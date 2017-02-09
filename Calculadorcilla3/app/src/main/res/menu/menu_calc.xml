@@ -15,23 +15,24 @@
         android:icon="@drawable/ic_language_black_24dp">
     </item>
 
-    <item
-        android:id="@+id/notifications"
+
+    <item android:id="@+id/notifications"
         android:title="Notifications"
         app:showAsAction="always"
         android:icon="@drawable/ic_sms_failed_black_24dp">
-
         <menu>
-            <item
-                android:id="@+id/toast"
-                android:title="Use toast notifcations">
-            </item>
-            <item
-                android:id="@+id/bar"
-                android:title="Use bar notifcations">
-            </item>
-
-            </menu>
+            <group
+                android:checkableBehavior="single"
+                >
+                <item
+                    android:id="@+id/toast"
+                    android:title="Use toast notifcations">
+                </item>
+                <item
+                    android:id="@+id/bar"
+                    android:title="Use bar notifcations">
+                </item>
+            </group>
+        </menu>
     </item>
-
 </menu>

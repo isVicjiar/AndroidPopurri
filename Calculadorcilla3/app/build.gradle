@@ -1,3 +1,4 @@
+
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
@@ -43,13 +44,14 @@ dependencies {
     })
 
     compile project(':flipper')
-    compile 'com.android.support:design:25.1.0'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:support-v4:25.1.0'
-    compile 'com.jakewharton:butterknife:8.5.1'
-    testCompile 'junit:junit:4.12'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile('com.twitter.sdk.android:twitter:2.3.1@aar') {
         transitive = true;
     }
+    compile 'com.android.support:design:25.1.1'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:support-v4:25.1.1'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    compile 'io.realm:realm-android:0.82.1'
+    testCompile 'junit:junit:4.12'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }

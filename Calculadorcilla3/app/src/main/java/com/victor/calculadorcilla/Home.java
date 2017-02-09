@@ -28,6 +28,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -36,6 +46,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static java.lang.String.valueOf;
 
 
 /**
@@ -72,12 +84,14 @@ public class Home extends Fragment {
     LocationListener locationListener;
 
     public void getWeather () {
-        service.getWeather(String.valueOf(lati), String.valueOf(longi), appid).enqueue(new Callback<WeatherMessage>() {
+        service.getWeather(valueOf(lati), valueOf(longi), appid).enqueue(new Callback<JSONObject>() {
             @Override
-            public void onResponse(Call<WeatherMessage> call, Response<WeatherMessage> response) {
+            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
                 if (response.isSuccessful()) {
-                    String weather = response.body().getName();
-                    ((TextView)rootview.findViewById(R.id.city)).setText(weather);
+                    Gson gson=new Gson();
+                    JSONObject obj=new JSONObject();
+//                    WeatherMessage weatherMessage=gson.fromJson(String.valueOf(response),WeatherMessage.class);
+                //    ((TextView)rootview.findViewById(R.id.city)).setText(weatherMessage.getName());
                     //String temp = response.body().getMain().getTemp();
                     //((TextView)rootview.findViewById(R.id.temperature)).setText(temp);
                 } else {
@@ -87,8 +101,9 @@ public class Home extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<WeatherMessage> call, Throwable t) {
+            public void onFailure(Call<JSONObject> call, Throwable t) {
                 not=settings.getString("notifications","Toast");
+                Log.d("REQUEST",t.getMessage());
                 if (not.equals("Toast")) {
                     Toast.makeText(context,"Error on request",Toast.LENGTH_LONG).show();
                 } else {
@@ -97,7 +112,7 @@ public class Home extends Fragment {
                     int mId = 1;
                     //Instanciamos Notification Manager
                     NotificationManager mNotificationManager =
-                            (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                            (NotificationManager) getActivity().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
 
                     // Para la notificaciones, en lugar de crearlas directamente, lo hacemos mediante

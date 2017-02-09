@@ -10,6 +10,8 @@ import android.widget.Button;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import io.fabric.sdk.android.Fabric;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * Created by inlab on 27/01/2017.
@@ -50,6 +52,9 @@ public class DECIDELOGIN extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_decidelogin);
         //Instanciamos el SharedPreferences
         settings = getSharedPreferences("MYAPP", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=settings.edit();
+        editor.putString("just_started","yes");
+        editor.apply();
         //Consultamos
         currentuser = settings.getString("CurrentUser", null);
         Thread th = new Thread(new Runnable() {

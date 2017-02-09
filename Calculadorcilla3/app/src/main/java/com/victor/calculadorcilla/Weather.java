@@ -1,14 +1,22 @@
 package com.victor.calculadorcilla;
 
 /**
- * Created by Victor on 05/02/2017.
+ * Created by Victor on 07/02/2017.
  */
 
-public class MainDataWe{
-    int id;
-    String main;
-    String description;
-    String icon;
+public class Weather {
+    private int id;
+    private String main;
+    private String description;
+    private String icon;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public int getId() {
         return id;
@@ -32,13 +40,5 @@ public class MainDataWe{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
     }
 }

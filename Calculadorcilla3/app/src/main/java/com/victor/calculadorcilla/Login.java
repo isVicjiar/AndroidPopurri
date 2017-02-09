@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -25,10 +24,15 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
+
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
     Button log;
     private TwitterLoginButton loginButton;
+    Realm realm;
 
     Button register;
 
@@ -61,6 +65,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         toolbar=((Toolbar)findViewById(R.id.toolbar_login));
         setSupportActionBar(toolbar);
         toolbar.setTitle("Login");
+        Realm.setDefaultConfiguration(new RealmConfiguration.Builder(getApplicationContext()).build());
+
+        realm= Realm.getDefaultInstance();
 
         user=((EditText)findViewById(R.id.editUser));
         pass=((EditText)findViewById(R.id.editPass));
@@ -81,20 +88,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 TwitterSession session = result.data;
                 // TODO: Remove toast and use the TwitterSession's userID
                 // with your app's user model
-                String us=session.getUserName();
-                boolean exists=peopledb.existsUser(us);
-                if (exists) {
+                String u=session.getUserName();
+                RealmResults realmResults=realm.where(User.class).equalTo("name", u).findAll();
+                if (!realmResults.isEmpty()) {
 
                 } else {
-                    ContentValues valuesToStore = new ContentValues();
-                    valuesToStore.put("user", us);
-                    valuesToStore.put("password", "");
-                    peopledb.createUser(valuesToStore, "People");
+                    User user = new User();
+                    user.setName(u);
+                    user.setPass("");
+
+                    realm.beginTransaction();
+                    realm.copyToRealmOrUpdate(user);
+                    realm.commitTransaction();
                 }
 
                 settings=getSharedPreferences("MYAPP", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=settings.edit();
-                editor.putString("CurrentUser",us);
+                editor.putString("CurrentUser",u);
                 editor.apply();
                 Intent i=new Intent(getApplicationContext(), Select_Activity.class);
                 String msg = "@" + session.getUserName() + " logged in!";
@@ -129,20 +139,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             Toast.makeText(getApplicationContext(), R.string.missing_text, Toast.LENGTH_SHORT).show();
         } else {
 
-            /*String insertQuery ="INSERT INTO People VALUES ("+)";
-            peopledb.getWritableDatabase().execSQL(insertQuery);*/
-
-
             String pa=String.valueOf(pass.getText());
             String u=user.getText().toString();
-            boolean exists=peopledb.existsUser(u);
-            if (exists) {
+            RealmResults realmResults=realm.where(User.class).equalTo("name", u).findAll();
+            if (!realmResults.isEmpty()) {
                 Toast.makeText(getApplicationContext(), "That user is already in our database!", Toast.LENGTH_LONG).show();
             } else {
-                ContentValues valuesToStor = new ContentValues();
-                valuesToStor.put("user", u);
-                valuesToStor.put("password", pa);
-                peopledb.createUser(valuesToStor, "People");
+                User user = new User();
+                user.setName(u);
+                user.setPass(pa);
+
+                realm.beginTransaction();
+                realm.copyToRealmOrUpdate(user);
+                realm.commitTransaction();
+
                 settings=getSharedPreferences("MYAPP", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=settings.edit();
                 editor.putString("CurrentUser",u);
@@ -161,15 +171,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         if (user.getText().toString().equals("")||pass.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), R.string.missing_text, Toast.LENGTH_SHORT).show();
         } else {
+            String pa=String.valueOf(pass.getText());
             String u=user.getText().toString();
-            String p=pass.getText().toString();
-            //busca el usuario, si existe mira si el pass esta bien
-            boolean exists=peopledb.existsUser(u);
-            if (!exists) {
+            RealmResults realmResults=realm.where(User.class).equalTo("name", u).findAll();
+            if (realmResults.isEmpty()) {
                 Toast.makeText(getApplicationContext(), R.string.wrong_user, Toast.LENGTH_SHORT).show();
             }
             else {
-                if (p.equals(peopledb.getPassword(u))) {
+                User comp= (User) realmResults.first();
+                if (pa.equals(comp.getPass())) {
                     settings=getSharedPreferences("MYAPP", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor=settings.edit();
                     editor.putString("CurrentUser",u);
@@ -179,7 +189,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
                     startActivity(i);
                     finish();
-                } else {
+                }
+                else {
                     Toast.makeText(getApplicationContext(),R.string.wrong_pass,Toast.LENGTH_SHORT).show();
                 }
             }

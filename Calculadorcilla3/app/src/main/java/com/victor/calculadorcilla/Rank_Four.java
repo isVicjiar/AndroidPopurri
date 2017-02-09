@@ -2,6 +2,7 @@ package com.victor.calculadorcilla;
 
 
 import android.database.Cursor;
+import android.media.AudioTrack;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
+
+import static android.support.v7.recyclerview.R.styleable.RecyclerView;
 
 
 /**
@@ -23,14 +29,28 @@ public class Rank_Four extends Fragment {
     View rootview;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayout;
-    peopleDB peopledb;
+    Realm realm;
 
     public Rank_Four() {
         // Required empty public constructor
     }
 
     public void getRanking() {
-        players=peopledb.getRanking(4);
+        RealmResults realmResults=realm.allObjects(User.class);
+        realmResults.sort("best_score4");
+        if (!realmResults.isEmpty()) {
+            User u;
+            for (int i=0; i<realmResults.size(); ++i) {
+                u= (User) realmResults.get(i);
+                String user=u.getName();
+                String photo=u.getPhoto();
+                int best_score=u.getBest_score4();
+                if (best_score!=0) {
+                    Player p=new Player(photo,user,best_score);
+                    players.add(p);
+                }
+            }
+        }
     }
 
     @Override
@@ -39,7 +59,7 @@ public class Rank_Four extends Fragment {
 
         rootview=inflater.inflate(R.layout.fragment_rank__four, container, false);
         // Inflate the layout for this fragment
-        peopledb = new peopleDB(getActivity());
+        realm= Realm.getDefaultInstance();
         getRanking();
 
         //findViewById del layout activity_main

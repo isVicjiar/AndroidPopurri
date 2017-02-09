@@ -44,8 +44,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,8 +59,7 @@
                 android:id="@+id/five"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,8 +74,7 @@
                 android:id="@+id/nine"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,8 +89,7 @@
                 android:id="@+id/thirteen"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
     </LinearLayout>
 
@@ -115,8 +111,7 @@
                 android:id="@+id/two"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -131,8 +126,7 @@
                 android:id="@+id/six"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -147,8 +141,7 @@
                 android:id="@+id/ten"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -163,8 +156,7 @@
                 android:id="@+id/fourteen"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
     </LinearLayout>
 
@@ -186,8 +178,7 @@
                 android:id="@+id/three"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -202,8 +193,7 @@
                 android:id="@+id/seven"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -218,8 +208,7 @@
                 android:id="@+id/eleven"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -234,8 +223,7 @@
                 android:id="@+id/fifteen"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
     </LinearLayout>
 
@@ -257,8 +245,7 @@
                 android:id="@+id/four"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -273,8 +260,7 @@
                 android:id="@+id/eight"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -289,8 +275,7 @@
                 android:id="@+id/twelve"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
 
         <LinearLayout
@@ -305,8 +290,7 @@
                 android:id="@+id/one"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_interr"
-                android:onClick="onClick4" />
+                android:background="@drawable/ic_interr" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

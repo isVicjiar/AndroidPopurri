@@ -33,25 +33,20 @@ public class Game extends Fragment implements View.OnClickListener {
             case R.id.rank:
                 Intent i=new Intent(getActivity(), Ranking.class);
                 startActivity(i);
-                getActivity().finish();
                 break;
             case R.id.mem_f:
                 SharedPreferences.Editor editor=settings.edit();
                 editor.putInt("GameMode",4);
-                editor.putString("Images_pack","pokemons");
                 editor.apply();
                 Intent e=new Intent(getActivity(), Memory.class);
                 startActivity(e);
-                getActivity().finish();
                 break;
             case R.id.mem_s:
                 SharedPreferences.Editor edit=settings.edit();
                 edit.putInt("GameMode",6);
-                edit.putString("Images_pack","pokemons");
                 edit.apply();
                 Intent in=new Intent(getActivity(), Memory.class);
                 startActivity(in);
-                getActivity().finish();
                 break;
         }
     }

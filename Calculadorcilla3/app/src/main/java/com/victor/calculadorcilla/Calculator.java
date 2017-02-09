@@ -4,7 +4,9 @@ package com.victor.calculadorcilla;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -48,6 +50,7 @@ public class Calculator extends Fragment implements View.OnClickListener {
     Button buttoni;
     Button buttonC;
     TextView textView;
+    View rootview;
 
     SharedPreferences settings;
 
@@ -347,8 +350,10 @@ public class Calculator extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootview=inflater.inflate(R.layout.fragment_calculator, container, false);
+        rootview=inflater.inflate(R.layout.fragment_calculator, container, false);
+        setRetainInstance(true);
         textView=((TextView)rootview.findViewById(R.id.textView3));
+
         button1=((Button) rootview.findViewById(R.id.button1));
         button2=((Button) rootview.findViewById(R.id.button2));
         button3=((Button) rootview.findViewById(R.id.button3));
@@ -388,22 +393,23 @@ public class Calculator extends Fragment implements View.OnClickListener {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
         outState.putInt("fase",fase);
         outState.putInt("reiniciar",reiniciar);
         outState.putString("operando1",operando1);
         outState.putString("operando2",operando2);
         outState.putChar("operacion",operacion);
         outState.putInt("usarr",usarr);
-        outState.putString("textview", textView.getText().toString());
+        outState.putCharSequence("tv", textView.getText());
         SharedPreferences.Editor editor=settings.edit();
         editor.putString("curr_fragment","Calculator");
         editor.apply();
+        super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.v("NOT NULL","HOLA1");
         if (savedInstanceState!=null) {
             if (savedInstanceState.getString("fase")==null) {
                 fase=0;
@@ -435,10 +441,12 @@ public class Calculator extends Fragment implements View.OnClickListener {
             } else {
                 usarr = savedInstanceState.getInt("usarr");
             }
-            if (savedInstanceState.getString("textview")==null) {
+            if (savedInstanceState.getCharSequence("tv")==null) {
                 textView.setText("0");
             } else {
-                textView.setText(savedInstanceState.getString("textview"));
+                Log.v("NOT NULL","HOLA2");
+                textView=((TextView)rootview.findViewById(R.id.textView3));
+                textView.setText("MECAGONMISMUERTOS");
             }
         }
     }
@@ -450,36 +458,71 @@ public class Calculator extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if (settings.getString("notifications","toast").equals("toast")) {
+            menu.findItem(R.id.toast).setChecked(true);
+        } else {
+            menu.findItem(R.id.bar).setChecked(true);
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean prueba=false;
         switch (item.getItemId()) {
             case R.id.call:
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "123456789"));
+                startActivity(callIntent);
                 break;
 
             case R.id.navigator:
-
-                break;
-            case R.id.toast:
-                SharedPreferences.Editor editor=settings.edit();
-                editor.putString("notifications","Toast");
-                editor.apply();
-                prueba=true;
-                break;
-            case R.id.bar:
-                SharedPreferences.Editor edit=settings.edit();
-                edit.putString("notifications","bar");
-                edit.apply();
-                prueba=true;
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+                startActivity(browserIntent);
                 break;
             default:
-                break;
+                if (!item.isChecked()) {
+                    item.setChecked(true);
+                    switch (item.getItemId()) {
+                        case R.id.toast:
+                            SharedPreferences.Editor editor=settings.edit();
+                            editor.putString("notifications","toast");
+                            editor.apply();
+                            prueba=true;
+                            break;
+                        case R.id.bar:
+                            SharedPreferences.Editor edit=settings.edit();
+                            edit.putString("notifications","bar");
+                            edit.apply();
+                            prueba=true;
+                            break;
+                    }
+            }
         }
         if (prueba) {
             String s=settings.getString("notifications",null);
             if (s.equals("toast")) {
                 Toast.makeText(getActivity().getApplicationContext(),"Notifications are now in Toast mode",Toast.LENGTH_LONG).show();
             } else {
+                //NOTIFICACION DE BARRA
+                //Entero que nos permite identificar la notificación
+                int mId = 1;
+                //Instanciamos Notification Manager
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getActivity().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
+
+                // Para la notificaciones, en lugar de crearlas directamente, lo hacemos mediante
+                // un Builder/contructor.
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(getActivity().getApplicationContext())
+                                .setSmallIcon(R.drawable.icono)
+                                .setContentTitle("Notification type changed")
+                                .setContentText("Now using bar notifications");
+
+                // mId nos permite actualizar las notificaciones en un futuro
+                // Notificamos
+                mNotificationManager.notify(mId, mBuilder.build());
             }
         }
         return super.onOptionsItemSelected(item);

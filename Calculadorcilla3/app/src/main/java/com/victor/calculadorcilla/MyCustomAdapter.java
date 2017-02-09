@@ -1,5 +1,8 @@
 package com.victor.calculadorcilla;
 
+import android.net.Uri;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +40,8 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.Adapte
             //PONER PATH HACIA LA FOTO
             //adapterViewholder.Photo.setImageDrawable(players.get(position).getPhoto());
             //TEMPORAL
-            adapterViewholder.Photo.setImageDrawable(adapterViewholder.v.getResources().getDrawable(R.drawable.ic_angry));
+            Uri mUri = Uri.parse(PhotoLayout);
+            //adapterViewholder.Photo.setImageBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), mUri));
         }
         adapterViewholder.User.setText(players.get(position).getUser());
         adapterViewholder.Score.setText(String.valueOf(players.get(position).getScore()));
